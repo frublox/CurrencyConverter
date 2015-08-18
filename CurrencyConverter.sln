@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrencyConverter", "FormsTest\CurrencyConverter.csproj", "{48151BDF-5225-4A7F-B2D9-DBEE381312BF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrencyConverter", "CurrencyConverter\CurrencyConverter.csproj", "{48151BDF-5225-4A7F-B2D9-DBEE381312BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
