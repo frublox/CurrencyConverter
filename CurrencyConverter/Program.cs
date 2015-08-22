@@ -149,7 +149,6 @@ namespace CurrencyConverter
 
         public override bool Equals(object other)
         {
-            
             return currency == ((Currency)other).currency;
         }
 
