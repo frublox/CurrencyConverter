@@ -17,41 +17,57 @@ namespace CurrencyConverter
         {
             InitializeComponent();
 
-            initFields();
+            init();
         }
 
-        private void initFields()
+        private void init()
         {
             currencyIn.SelectedIndex = 0;
             currencyOut.SelectedIndex = 3;
-            currencyInput.Text = "0";
+            currencyInput.Text = "1";
+        }
+
+        private void swapCurrencies()
+        {
+            int temp = currencyIn.SelectedIndex;
+            currencyIn.SelectedIndex = currencyOut.SelectedIndex;
+            currencyOut.SelectedIndex = temp;
         }
 
         private void calculateOutput()
         {
-            Currency inputCurrency = getInputCurrency();
-            Currency outputCurrency = getOutputCurrency();
+            Currency @in = getInputCurrency();
+            Currency @out = getOutputCurrency();
 
-            string text = currencyInput.Text;
+            string amountAsString = currencyInput.Text;
             decimal amount = 0;
 
-            if (decimal.TryParse(text, out amount))
+            if (decimal.TryParse(amountAsString, out amount))
             {
-                var output = Program.Convert(inputCurrency, outputCurrency, amount);
+                var output = Program.Convert(@in, @out, amount);
                 currencyOutput.Text = output.ToString();
             }
+            else
+            {
+                currencyOutput.Text = "Please enter a valid number.";
+            }
+        }
+
+        private Currency toCurrency(string currencyAsString)
+        {
+            return new Currency((ECurrency)Enum.Parse(typeof(ECurrency), currencyAsString));
         }
 
         private Currency getInputCurrency()
         {
             var selected = currencyOut.SelectedItem.ToString();
-            return Program.StrToCurrency[selected];
+            return toCurrency(selected);
         }
 
         private Currency getOutputCurrency()
         {
             var selected = currencyIn.SelectedItem.ToString();
-            return Program.StrToCurrency[selected];
+            return toCurrency(selected);
         }
 
         private void PriceCheckerForm_KeyPress(object sender, KeyPressEventArgs e)
@@ -65,6 +81,11 @@ namespace CurrencyConverter
         private void convertButton_Click(object sender, EventArgs e)
         {
             calculateOutput();
+        }
+
+        private void swapButton_Click(object sender, EventArgs e)
+        {
+            swapCurrencies();
         }
     }
 }

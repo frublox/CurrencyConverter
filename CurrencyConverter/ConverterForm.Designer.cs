@@ -34,11 +34,13 @@
             this.currencyOut = new System.Windows.Forms.ComboBox();
             this.currencyOutput = new System.Windows.Forms.TextBox();
             this.currencyInput = new System.Windows.Forms.TextBox();
+            this.swapButton = new System.Windows.Forms.Button();
             this.inputPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // inputPanel
             // 
+            this.inputPanel.Controls.Add(this.swapButton);
             this.inputPanel.Controls.Add(this.currencyIn);
             this.inputPanel.Controls.Add(this.convertButton);
             this.inputPanel.Controls.Add(this.currencyOut);
@@ -100,7 +102,17 @@
             this.currencyInput.Size = new System.Drawing.Size(128, 20);
             this.currencyInput.TabIndex = 1;
             // 
-            // PriceCheckerForm
+            // swapButton
+            // 
+            this.swapButton.Location = new System.Drawing.Point(148, 55);
+            this.swapButton.Name = "swapButton";
+            this.swapButton.Size = new System.Drawing.Size(53, 23);
+            this.swapButton.TabIndex = 6;
+            this.swapButton.Text = "Swap";
+            this.swapButton.UseVisualStyleBackColor = true;
+            this.swapButton.Click += new System.EventHandler(this.swapButton_Click);
+            // 
+            // ConverterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -109,7 +121,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximumSize = new System.Drawing.Size(255, 141);
             this.MinimumSize = new System.Drawing.Size(255, 141);
-            this.Name = "PriceCheckerForm";
+            this.Name = "ConverterForm";
             this.ShowIcon = false;
             this.Text = "Currency Converter";
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PriceCheckerForm_KeyPress);
@@ -127,6 +139,7 @@
         internal System.Windows.Forms.ComboBox currencyOut;
         private System.Windows.Forms.Button convertButton;
         private System.Windows.Forms.ComboBox currencyIn;
+        private System.Windows.Forms.Button swapButton;
     }
 }
 
