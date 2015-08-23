@@ -44,7 +44,7 @@ namespace CurrencyConverter
         /// <summary>
         /// Returns the marketid needed to find the conversion rate between to currencies.
         /// 
-        /// If @out does not have its own market or is less significant than @out, then @in's market must be 
+        /// If @in does not have its own market or is less significant than @out, then @out's market must be 
         /// used instead. In this case, swapNeeded is set to true so that the caller knows that the actual
         /// conversion rate is the reciprocal of the output.
         /// </summary>
@@ -58,6 +58,7 @@ namespace CurrencyConverter
         {
             Currency currency;
             Currency market;
+            swapNeeded = false;
 
             if (@out.value > @in.value)
             {
@@ -68,7 +69,6 @@ namespace CurrencyConverter
             {
                 currency = @out;
                 market = @in;
-                swapNeeded = false;
             }
 
             return currency + "_" + market;
@@ -94,7 +94,7 @@ namespace CurrencyConverter
             var price = decimal.Parse(json["data"]["last_trade"]["price"].ToString(), NumberStyles.Float);
 
             if (swapNeeded)
-                return 1 /price;
+                return 1 / price;
             else
                 return price;
         }
@@ -122,8 +122,16 @@ namespace CurrencyConverter
         public readonly int value;
 
         public static readonly List<ECurrency> Markets = new List<ECurrency>(
-            new ECurrency[] {
-                ECurrency.LTC, ECurrency.BTC, ECurrency.USD
+            new ECurrency[] 
+            {
+                ECurrency.LTC, ECurrency.BTC, ECurrency.EUR, ECurrency.USD
+            }
+        );
+
+        public static readonly List<ECurrency> FiatCurrencies = new List<ECurrency>(
+            new ECurrency[]
+            {
+                ECurrency.USD, ECurrency.EUR
             }
         );
 
@@ -140,6 +148,11 @@ namespace CurrencyConverter
         public bool HasOwnMarket()
         {
             return Markets.Contains(currency);
+        }
+
+        public bool IsFiat()
+        {
+            return FiatCurrencies.Contains(currency);
         }
 
         public override string ToString()
