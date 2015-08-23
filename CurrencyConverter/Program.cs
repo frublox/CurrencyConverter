@@ -128,13 +128,6 @@ namespace CurrencyConverter
             }
         );
 
-        public static readonly List<ECurrency> FiatCurrencies = new List<ECurrency>(
-            new ECurrency[]
-            {
-                ECurrency.USD, ECurrency.EUR
-            }
-        );
-
         public Currency(ECurrency currency)
         {
             this.currency = currency;
@@ -148,11 +141,6 @@ namespace CurrencyConverter
         public bool HasOwnMarket()
         {
             return Markets.Contains(currency);
-        }
-
-        public bool IsFiat()
-        {
-            return FiatCurrencies.Contains(currency);
         }
 
         public override string ToString()
