@@ -24,7 +24,7 @@ namespace CurrencyConverter
         {
             currencyIn.SelectedIndex = 0;
             currencyOut.SelectedIndex = 3;
-            currencyInput.Text = "1";
+            input.Text = "1";
         }
 
         private void swapCurrencies()
@@ -39,17 +39,17 @@ namespace CurrencyConverter
             Currency @in = getInputCurrency();
             Currency @out = getOutputCurrency();
 
-            string amountAsString = currencyInput.Text;
+            string amountAsString = input.Text;
             decimal amount = 0;
 
             if (decimal.TryParse(amountAsString, out amount))
             {
-                var output = Program.Convert(@in, @out, amount);
-                currencyOutput.Text = output.ToString();
+                decimal result = Program.Convert(@in, @out, amount);
+                output.Text = result.ToString("F6");
             }
             else
             {
-                currencyOutput.Text = "Please enter a valid number.";
+                output.Text = "Invalid number!";
             }
         }
 
@@ -70,14 +70,6 @@ namespace CurrencyConverter
             return toCurrency(selected);
         }
 
-        private void PriceCheckerForm_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == (char)Keys.Return)
-            {
-                calculateOutput();
-            }
-        }
-
         private void convertButton_Click(object sender, EventArgs e)
         {
             calculateOutput();
@@ -86,6 +78,14 @@ namespace CurrencyConverter
         private void swapButton_Click(object sender, EventArgs e)
         {
             swapCurrencies();
+        }
+
+        private void input_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                calculateOutput();
+            }
         }
     }
 }
