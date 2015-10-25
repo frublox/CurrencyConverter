@@ -18,7 +18,7 @@ namespace CurrencyConverter
         private readonly int significance;
 
         private readonly ECurrency eCurrency;
-        private static readonly List<ECurrency> Markets = new List<ECurrency>(
+        private static readonly List<ECurrency> markets = new List<ECurrency>(
             new ECurrency[]
             {
                 ECurrency.LTC, ECurrency.BTC, ECurrency.EUR, ECurrency.USD
@@ -33,8 +33,8 @@ namespace CurrencyConverter
         {
             this.eCurrency = eCurrency;
 
-            if (Markets.Contains(eCurrency))
-                significance = Markets.IndexOf(eCurrency) + 1;
+            if (markets.Contains(eCurrency))
+                significance = markets.IndexOf(eCurrency) + 1;
             else
                 significance = 0;
         }
