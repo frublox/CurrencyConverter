@@ -24,7 +24,7 @@ namespace CurrencyConverter
         {
             currencyIn.SelectedIndex = 0;
             currencyOut.SelectedIndex = 3;
-            input.Text = "1";
+            currencyInput.Text = "1";
         }
 
         private void swapCurrencies()
@@ -36,38 +36,33 @@ namespace CurrencyConverter
 
         private void calculateOutput()
         {
-            Currency @in = getInputCurrency();
-            Currency @out = getOutputCurrency();
+            Currency @in = getCurrency(currencyIn);
+            Currency @out = getCurrency(currencyOut);
 
-            string amountAsString = input.Text;
+            string amountAsString = currencyInput.Text;
             decimal amount = 0;
 
             if (decimal.TryParse(amountAsString, out amount))
             {
-                decimal result = Program.Convert(@in, @out, amount);
-                output.Text = result.ToString("F6");
+                decimal result = Currency.Convert(@in, @out, amount);
+                currencyOutput.Text = result.ToString("F6");
             }
             else
             {
-                output.Text = "Invalid number!";
+                currencyOutput.Text = "Invalid number!";
             }
         }
 
-        private Currency toCurrency(string currencyAsString)
+        private Currency parseCurrency(string str)
         {
-            return new Currency((ECurrency)Enum.Parse(typeof(ECurrency), currencyAsString));
+            var eCurrency = (ECurrency)Enum.Parse(typeof(ECurrency), str);
+            return new Currency(eCurrency);
         }
 
-        private Currency getInputCurrency()
+        private Currency getCurrency(ComboBox comboBox)
         {
-            var selected = currencyOut.SelectedItem.ToString();
-            return toCurrency(selected);
-        }
-
-        private Currency getOutputCurrency()
-        {
-            var selected = currencyIn.SelectedItem.ToString();
-            return toCurrency(selected);
+            var selected = comboBox.SelectedItem.ToString();
+            return parseCurrency(selected);
         }
 
         private void convertButton_Click(object sender, EventArgs e)

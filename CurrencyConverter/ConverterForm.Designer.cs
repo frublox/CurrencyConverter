@@ -124,7 +124,6 @@
             this.Name = "ConverterForm";
             this.ShowIcon = false;
             this.Text = "Currency Converter";
-            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PriceCheckerForm_KeyPress);
             this.inputPanel.ResumeLayout(false);
             this.inputPanel.PerformLayout();
             this.ResumeLayout(false);
